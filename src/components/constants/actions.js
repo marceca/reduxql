@@ -1,9 +1,13 @@
-const GetAuthor = 'GetAuthor';
+const GetBook = 'GetBook';
+const GetAllBooks = 'GetAllBooks';
 
-const getAuthor = (data) => ({type: GetAuthor, data});
+const getBook = (data) => ({type: GetBook, data});
+const getAllBooks = (data) => ({type: GetAllBooks, data});
 
 
 module.exports = {
-  GetAuthor,
-  getAuthor
+  GetBook,
+  getBook,
+  GetAllBooks,
+  getAllBooks
 }

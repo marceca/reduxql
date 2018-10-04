@@ -1,21 +1,29 @@
 const fetch = require('node-fetch');
 
-function Waspql(store, type, API, query, variables) {
-  // console.log('variables ',variables)
-  // console.log('query ',query)
-  if(variables === undefined) {
-    // console.log('variables undefined')
+function Waspql(store, type, API, userQuery, userVariables) {
+  if(userVariables) {
+  fetch(API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query: userQuery,
+      variables: userVariables,
+    }),
+  })
+    .then(result => result.json())
+    .then((result) => store.dispatch(type(result)))
+} else {
+  fetch(API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query: userQuery,
+      variables: userVariables
+    }),
+  })
+    .then(result => result.json())
+    .then((result) => store.dispatch(type(result)))
   }
-
-fetch(API, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    query: query
-  }),
-})
-  .then(result => result.json())
-  .then((result) => store.dispatch(type(result)))
 }
 
 export default Waspql;

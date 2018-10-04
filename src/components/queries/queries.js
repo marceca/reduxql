@@ -1,7 +1,21 @@
+let getAllBooks =  `
+{
+  books {
+    name
+    genre
+    id
+    author {
+      name
+      age
+      id
+    }
+  }
+}
+`
 
 let getBookQuery =  `
-{
-  book(id: "5bb394c183f588d40f9a2c6f") {
+query ($id: ID!) {
+  book(id: $id) {
     name
     genre
     author {
@@ -13,9 +27,9 @@ let getBookQuery =  `
       }
     }
   }
-}
-`
+}`
 
 module.exports = {
+  getAllBooks,
   getBookQuery
 }
